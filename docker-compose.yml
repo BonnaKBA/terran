@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  terran:
+    build: .
+    container_name: terran
+    image: terran_ds
+    restart: unless-stopped
