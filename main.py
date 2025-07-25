@@ -235,7 +235,7 @@ class VoiceRatingPaginator(View):
         page_ratings = self.ratings[start:end]
 
         embed = discord.Embed(
-            title="🎤 Топ голосовой активности",
+            title="Топ голосовой активности",
             color=discord.Color.blurple()
         )
 
@@ -259,22 +259,25 @@ class VoiceRatingPaginator(View):
     @discord.ui.button(label="◀️", style=discord.ButtonStyle.secondary)
     async def prev_button(self, interaction: Interaction, button: Button):
         if interaction.user != self.ctx.author:
-            await interaction.response.send_message("Это не ваша сессия.", ephemeral=True)
+            await interaction.response.defer()
             return
+    
         self.current_page -= 1
         self.update_buttons()
         await self.send_page()
         await interaction.response.defer()
-
+    
     @discord.ui.button(label="▶️", style=discord.ButtonStyle.secondary)
     async def next_button(self, interaction: Interaction, button: Button):
         if interaction.user != self.ctx.author:
-            await interaction.response.send_message("Это не ваша сессия.", ephemeral=True)
+            await interaction.response.defer()
             return
+    
         self.current_page += 1
         self.update_buttons()
         await self.send_page()
         await interaction.response.defer()
+
 
 @bot.command()
 async def voice(ctx):
